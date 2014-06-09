@@ -85,11 +85,11 @@ public class AnimationState extends State {
         // end, if true, then goto main state
         if (type == Direction.Left || type == Direction.Right) {
             if (Math.abs(position.x) >= applet.width) {
-                getStateMachine().change(getStateMachine().find("main"));
+                getStateMachine().change("main");
             }
         } else {
             if (Math.abs(position.y) >= applet.height) {
-                getStateMachine().change(getStateMachine().find("main"));
+                getStateMachine().change("main");
             }
         }
     }
@@ -136,7 +136,6 @@ public class AnimationState extends State {
         rightState.onStateRender(g);
         rightState.onInternalStateRender(g);
         g.popMatrix();
-
         g.fill(0xcc, 0xcc, 0xcc, 0xff - clr);
         g.rect(0, 0, applet.width, applet.height);
     }

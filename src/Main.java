@@ -25,9 +25,8 @@ public class Main extends PApplet implements ShutDownListener {
 
         size(1024, 768);
 
-        System.out.println("Data Path : " + dataPath(""));
-
         try {
+            System.out.println(dataPath(""));
             System.out.println(Inet4Address.getLocalHost().getHostAddress());
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,6 +68,10 @@ public class Main extends PApplet implements ShutDownListener {
         // depends on states
         rootMachine.attach(new MainState(this));
         rootMachine.attach(new AnimationState(this));
+
+        frameRate(120);
+
+        Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
     }
 
     public void draw() {
@@ -76,6 +79,15 @@ public class Main extends PApplet implements ShutDownListener {
         background(0xcc);
 
         rootMachine.invokeRenderMethod(g);
+
+        if (frame != null) {
+            frame.setTitle("FPS : " + frameRate);
+        }
+
+        String s = "FPS : " + (int) frameRate;
+
+        fill(0x00);
+        text(s, width / 2 - textWidth(s) / 2, 40);
     }
 
     public void mouseClicked() { rootMachine.onMouseClick(); }
