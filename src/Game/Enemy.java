@@ -41,7 +41,7 @@ public class Enemy extends GameObject {
 
         atlasDie.noLoop();
 
-        world.createDynamic(this, x, y, 50, ENEMY_HEIGHT);
+        world.createDynamic(this, x, y, 150, ENEMY_HEIGHT);
     }
 
     public void killEnemy() {
@@ -50,13 +50,39 @@ public class Enemy extends GameObject {
         atlasActive = atlasDie;
     }
 
+
+
+    public void changeDirectionToLeft() {
+
+        if (!goLeft) {
+            setPosition(getPosition().x - width, getPosition().y);
+        }
+
+        goLeft = true;
+    }
+
+    public void changeDiretionToRight() {
+
+        if (goLeft) {
+            setPosition(getPosition().x + width, getPosition().y);
+        }
+
+        goLeft = false;
+    }
+
+    public void swapDirection() {
+
+        if (goLeft) {
+            changeDiretionToRight();
+        } else {
+            changeDirectionToLeft();
+        }
+    }
+
     public void onGameObjectRender(PGraphics g) {
 
         if (attackTime != 0 && System.currentTimeMillis() - attackTime > ENEMY_ATTACK_DELAY) {
-
-//            atlasActive = atlasWalk;
-//            attackTime = 0;
-//            player = null;
+            // emh :(
         }
 
         if (!isKilled && isMovable) {
@@ -69,44 +95,24 @@ public class Enemy extends GameObject {
 
             if (platform != null) {
 
-                if (getPosition().x >= platform.getPosition().x + platform.width / 2 - width / 2) {
-                    goLeft = true;
-                } else if (getPosition().x <= platform.getPosition().x - platform.width / 2 + width / 2) {
-                    goLeft = false;
+                if (getPosition().x >= platform.getPosition().x + platform.width / 2 + width / 2) {
+                    changeDirectionToLeft();
+                } else if (getPosition().x <= platform.getPosition().x - platform.width / 2 - width / 2) {
+                    changeDiretionToRight();
                 }
             }
 
             if (player != null) {
 
-                float distance = player.getDistance(this);
-
-                if (distance < 100 && !player.isKilled && (
-                        getPosition().x - player.getPosition().x > 0 && goLeft ||
-                                getPosition().x - player.getPosition().x < 0 && !goLeft
+                if (!player.isKilled && (
+                    getPosition().x - player.getPosition().x > 0 && goLeft ||
+                    getPosition().x - player.getPosition().x < 0 && !goLeft
                 )) {
-
                     atlasActive = atlasFight;
 
-                    if (distance < 75) {
-                        if (atlasActive.getIndex() == 9) {
-
-                            player.killPlayer();
-
-                            new Thread(new Runnable() {
-                                public void run() {
-                                    try {
-                                        Thread.sleep(150);
-                                    }
-                                    catch (InterruptedException e) {
-                                        // ignore
-                                    }
-                                    finally {
-                                        goLeft = !goLeft;
-                                    }
-                                }
-                            }
-                            ).start();
-                        }
+                    if (atlasActive.getIndex() == 9) {
+                        player.killPlayer();
+                        swapDirection();
                     }
                 } else {
                     atlasActive = atlasWalk;
@@ -122,12 +128,15 @@ public class Enemy extends GameObject {
             if (!goLeft) {
 
                 g.pushMatrix();
-                g.translate(width + width + 25, 0);
+                g.translate(width * 2 - 150, 0);
                 g.scale(-1, 1);
                 atlasActive.render(g);
                 g.popMatrix();
             } else {
+                g.pushMatrix();
+                g.translate(150, 0);
                 atlasActive.render(g);
+                g.popMatrix();
             }
         }
 

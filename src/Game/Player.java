@@ -13,11 +13,11 @@ public class Player extends GameObject {
 
     public static final int PLAYER_WIDTH = 120;
     public static final int PLAYER_HEIGHT = 120;
-    public static final int PLAYER_INTERVAL = 75;
+    public static final int PLAYER_INTERVAL = 50;
     public static final int PLAYER_VELOCITY_X = 8;
     public static final int PLAYER_VELOCITY_Y = 25;
     public static final int PLAYER_DIE_DELAY = 1000;
-    public static final int PLAYER_ATTACK_DELAY = 250;
+    public static final int PLAYER_ATTACK_DELAY = 350;
 
     private TextureAtlas atlasIdle;
     private TextureAtlas atlasRun;

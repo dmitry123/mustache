@@ -211,7 +211,7 @@ public class TakePictureState extends StateWithBack {
             Rectangle r = faces[0];
 
             // extra scale for image
-            int extra = (int)(1.0 * r.width / CAMERA_WIDTH / 5.0 * CAMERA_WIDTH);
+            int extra = (int)(1.0 * r.width / 5.0);
 
             // applying extra scale
             r.x -= extra;
@@ -223,7 +223,7 @@ public class TakePictureState extends StateWithBack {
             int h = r.width;
 
             // create image with new scale
-            PImage image = applet.createImage(w, h, applet.RGB);
+            PImage image = applet.createImage(w, h, PApplet.RGB);
 
             // check captured face for window's overflow
             if (r.x + r.width > CAMERA_WIDTH) {
@@ -239,7 +239,7 @@ public class TakePictureState extends StateWithBack {
 
             // copy pixels from capture frame to new image
             for (int x = 0, i = 0; x < image.pixels.length; x++, i++) {
-                image.pixels[i] = video.pixels[x + r.x + CAMERA_WIDTH * r.y + (CAMERA_WIDTH - r.width) * (int)(i / r.width)];
+                image.pixels[i] = video.pixels[x + r.x + CAMERA_WIDTH * r.y + (CAMERA_WIDTH - r.width) * i / r.width];
             }
 
             // set new user's image

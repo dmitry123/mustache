@@ -110,7 +110,7 @@ public class GameObject implements GameListener {
         g.noFill();
         g.stroke(0xffffffff);
         g.rectMode(g.CENTER);
-        g.rect(0, 0, width, height);
+//        g.rect(0, 0, width, height);
         g.rectMode(g.CORNER);
         g.popMatrix();
     }

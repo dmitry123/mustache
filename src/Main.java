@@ -69,7 +69,7 @@ public class Main extends PApplet implements ShutDownListener {
         rootMachine.attach(new MainState(this));
         rootMachine.attach(new AnimationState(this));
 
-        frameRate(120);
+        frameRate(60);
 
         Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
     }
@@ -80,14 +80,14 @@ public class Main extends PApplet implements ShutDownListener {
 
         rootMachine.invokeRenderMethod(g);
 
-        if (frame != null) {
-            frame.setTitle("FPS : " + frameRate);
-        }
-
         String s = "FPS : " + (int) frameRate;
 
-        fill(0x00);
-        text(s, width / 2 - textWidth(s) / 2, 40);
+        if (frame != null) {
+            frame.setTitle(s);
+        }
+
+//        fill(0x00);
+//        text(s, width / 2 - textWidth(s) / 2, 40);
     }
 
     public void mouseClicked() { rootMachine.onMouseClick(); }
