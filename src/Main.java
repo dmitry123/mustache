@@ -25,6 +25,8 @@ public class Main extends PApplet implements ShutDownListener {
 
         size(1024, 768);
 
+        System.out.println("Data Path : " + dataPath(""));
+
         try {
             System.out.println(Inet4Address.getLocalHost().getHostAddress());
         } catch (Exception e) {
