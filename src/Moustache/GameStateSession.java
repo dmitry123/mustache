@@ -50,7 +50,7 @@ public class GameStateSession implements Runnable {
                             continue;
                         }
 
-                        // write error message
+                        // write ok message
                         out.writeUTF("~");
                         out.flush();
 

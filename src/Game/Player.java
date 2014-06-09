@@ -101,38 +101,42 @@ public class Player extends GameObject {
 
     public void startSocketSession(Socket socket) {
 
-        closeSocketSession();
-
-        if (thread == null) {
-
-            // copy socket object
-            this.socket = socket;
-
-            // create new thread
-            thread = new Thread(new PlayerSession(this));
-
-            // detach thread
-            thread.start();
-        }
-    }
-
-    public void closeSocketSession() {
-
+        // i don't know how does it
+        // possible, but who knows,
+        // maybe only if someone will
+        // try to start session from
+        // existing session, hmm ...
         if (thread != null) {
             thread.interrupt();
         }
 
+        if (this.socket != null) {
+            closeSocketSession();
+        }
+
+        this.socket = socket;
+
+        thread = new Thread(
+            new PlayerSession(this));
+
+        thread.start();
+    }
+
+    public void closeSocketSession() {
+
         if (socket != null) {
+
             try {
                 socket.close();
             }
             catch (IOException e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
+
+            socket = null;
         }
 
         thread = null;
-        socket = null;
     }
 
     public void setIdleAnimation() {

@@ -41,7 +41,7 @@ public class Enemy extends GameObject {
 
         atlasDie.noLoop();
 
-        world.createDynamic(this, x, y, 150, ENEMY_HEIGHT);
+        world.createDynamic(this, x, y, 100, ENEMY_HEIGHT);
     }
 
     public void killEnemy() {
@@ -128,13 +128,15 @@ public class Enemy extends GameObject {
             if (!goLeft) {
 
                 g.pushMatrix();
-                g.translate(width * 2 - 150, 0);
+                g.translate(width * 2 - 100, 0);
                 g.scale(-1, 1);
                 atlasActive.render(g);
                 g.popMatrix();
+
             } else {
+
                 g.pushMatrix();
-                g.translate(150, 0);
+                g.translate(100, 0);
                 atlasActive.render(g);
                 g.popMatrix();
             }

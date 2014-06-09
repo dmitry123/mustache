@@ -134,8 +134,6 @@ public class World implements ContactListener {
         fd.friction = 10;
         fd.restitution = 0.0f;
 
-//    fd.filter.groupIndex = (object instanceof Player) ? -2 : -1;
-
         bd.type = BodyType.DYNAMIC;
         bd.position.set(box2d.coordPixelsToWorld(x, y));
 

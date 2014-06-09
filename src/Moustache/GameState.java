@@ -107,6 +107,8 @@ public class GameState extends StateWithBack {
 
     public void onStateTick() {
 
+        player = (Player) world.find("player");
+
         if (player != null) {
 
             if (isJumpPressed) {
@@ -120,6 +122,15 @@ public class GameState extends StateWithBack {
                 player.doRight();
             } else {
                 player.setIdleAnimation();
+            }
+        }
+
+        for (Iterator<Player> i = playerList.iterator(); i.hasNext(); ) {
+
+            Player p = i.next();
+
+            if (p.getSocket() == null) {
+                i.remove();
             }
         }
     }
@@ -200,11 +211,11 @@ public class GameState extends StateWithBack {
 
             Vertex bo = world.getBackgroundOffset();
 
-//            g.background(
-//                (int) ((bo.x + 10) / 20.0 * 0xff) | 0x70,
-//                (int) ((bo.y + 10) / 20.0 * 0xff) | 0x70,
-//                (int) ((bo.z + 10) / 20.0 * 0xff) | 0x70
-//            );
+            g.background(
+                (int) ((bo.x + 10) / 20.0 * 0xff),
+                (int) ((bo.y + 10) / 20.0 * 0xff),
+                (int) ((bo.z + 10) / 20.0 * 0xff)
+            );
 
 //            colorChanger.setToColor(
 //                (int) ((bo.x + 10) / 20.0 * 0xff),

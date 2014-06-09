@@ -39,7 +39,7 @@ public class PlayerSession implements Runnable {
 
             try {
                 if ((line = in.readUTF()) == null) {
-                    continue;
+                    break;
                 }
             }
             catch (EOFException e) {
@@ -50,7 +50,7 @@ public class PlayerSession implements Runnable {
             }
 
             if (line == null) {
-                continue;
+                break;
             }
 
             line = line.substring(0, line.indexOf('\n'));
@@ -90,10 +90,12 @@ public class PlayerSession implements Runnable {
             }
         }
 
+        player.closeSocketSession();
+
         int countOfPlayers = 0;
 
         for (GameObject go : player.getWorld ().getList()) {
-            if (go.getName().equals("player")) {
+            if (go instanceof Player) {
                 ++countOfPlayers;
             }
         }
@@ -101,7 +103,5 @@ public class PlayerSession implements Runnable {
         if (countOfPlayers > 1) {
             player.getWorld().detach(player);
         }
-
-        player.closeSocketSession();
     }
 }
