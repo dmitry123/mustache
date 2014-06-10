@@ -87,7 +87,7 @@ public class GameObject implements GameListener {
 
     public float getDistance(GameObject body) {
 
-        return (float)Math.sqrt(
+        return (float) Math.sqrt(
                 Math.pow(getPosition().x - body.getPosition().x, 2.0f) +
                         Math.pow(getPosition().y - body.getPosition().y, 2.0f));
     }
@@ -110,15 +110,26 @@ public class GameObject implements GameListener {
         g.noFill();
         g.stroke(0xffffffff);
         g.rectMode(g.CENTER);
-//        g.rect(0, 0, width, height);
+        g.rect(0, 0, width, height);
         g.rectMode(g.CORNER);
         g.popMatrix();
     }
 
-    public void onGameObjectAttach() {}
-    public void onGameObjectDetach() {}
-    public void onGameObjectRender(PGraphics g) {}
-    public void onGameObjectCollide(GameObject object) {}
-    public void onGameObjectOutOfWorld() {}
-    public void onGameObjectLeave(GameObject object) {}
+    public void onGameObjectAttach() {
+    }
+
+    public void onGameObjectDetach() {
+    }
+
+    public void onGameObjectRender(PGraphics g) {
+    }
+
+    public void onGameObjectCollide(GameObject object) {
+    }
+
+    public void onGameObjectOutOfWorld() {
+    }
+
+    public void onGameObjectLeave(GameObject object) {
+    }
 }

@@ -51,20 +51,19 @@ public class Enemy extends GameObject {
     }
 
 
-
     public void changeDirectionToLeft() {
 
         if (!goLeft) {
-            setPosition(getPosition().x - width, getPosition().y);
+//            setPosition(getPosition().x - width, getPosition().y);
         }
 
         goLeft = true;
     }
 
-    public void changeDiretionToRight() {
+    public void changeDirectionToRight() {
 
         if (goLeft) {
-            setPosition(getPosition().x + width, getPosition().y);
+//            setPosition(getPosition().x + width, getPosition().y);
         }
 
         goLeft = false;
@@ -73,7 +72,7 @@ public class Enemy extends GameObject {
     public void swapDirection() {
 
         if (goLeft) {
-            changeDiretionToRight();
+            changeDirectionToRight();
         } else {
             changeDirectionToLeft();
         }
@@ -95,18 +94,18 @@ public class Enemy extends GameObject {
 
             if (platform != null) {
 
-                if (getPosition().x >= platform.getPosition().x + platform.width / 2 + width / 2) {
+                if (getPosition().x >= platform.getPosition().x + platform.width / 2 - width / 2) {
                     changeDirectionToLeft();
-                } else if (getPosition().x <= platform.getPosition().x - platform.width / 2 - width / 2) {
-                    changeDiretionToRight();
+                } else if (getPosition().x <= platform.getPosition().x - platform.width / 2 + width / 2) {
+                    changeDirectionToRight();
                 }
             }
 
             if (player != null) {
 
                 if (!player.isKilled && (
-                    getPosition().x - player.getPosition().x > 0 && goLeft ||
-                    getPosition().x - player.getPosition().x < 0 && !goLeft
+                        getPosition().x - player.getPosition().x > 0 && goLeft ||
+                                getPosition().x - player.getPosition().x < 0 && !goLeft
                 )) {
                     atlasActive = atlasFight;
 
@@ -128,7 +127,7 @@ public class Enemy extends GameObject {
             if (!goLeft) {
 
                 g.pushMatrix();
-                g.translate(width * 2 - 100, 0);
+                g.translate(width * 2 - width / 2, 0);
                 g.scale(-1, 1);
                 atlasActive.render(g);
                 g.popMatrix();
@@ -136,7 +135,7 @@ public class Enemy extends GameObject {
             } else {
 
                 g.pushMatrix();
-                g.translate(100, 0);
+                g.translate(width / 2, 0);
                 atlasActive.render(g);
                 g.popMatrix();
             }
@@ -182,8 +181,7 @@ public class Enemy extends GameObject {
             } else {
                 platform = go;
             }
-        }
-        else if (go instanceof Player) {
+        } else if (go instanceof Player) {
             player = (Player) go;
         }
     }

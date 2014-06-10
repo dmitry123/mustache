@@ -20,6 +20,12 @@ public class StateWithBack extends StateWithAnimation {
                 getStateMachine().change(getStateMachine().popLastState());
             }
         });
+
+        backInterfaceMenu.attach("Exit").setInterfaceListener(new InterfaceDelegate() {
+            public void onInterfaceMouseClick() {
+                System.exit(0);
+            }
+        });
     }
 
     public void onInternalStateRender(PGraphics g) {

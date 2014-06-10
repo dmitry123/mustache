@@ -2,6 +2,7 @@ import Common.*;
 
 import Moustache.AnimationState;
 import Moustache.MainState;
+import org.gstreamer.Bus;
 import processing.core.PApplet;
 
 import java.net.Inet4Address;
@@ -23,11 +24,12 @@ public class Main extends PApplet implements ShutDownListener {
 
     public void setup() {
 
-        size(1024, 768);
+        size(800, 600);
+
+        System.out.println("\nData Path : " + dataPath(""));
 
         try {
-            System.out.println(dataPath(""));
-            System.out.println(Inet4Address.getLocalHost().getHostAddress());
+            System.out.println("Server's IP : " + Inet4Address.getLocalHost().getHostAddress());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +43,7 @@ public class Main extends PApplet implements ShutDownListener {
 
         waitManager = new WaitManager(this);
         stateMachine = new StateMachine(this);
-//        audioPlayer = new AudioPlayer(this);
+        audioPlayer = new AudioPlayer(this);
 
         resource.imagePlayerFall = loadImage("texture/player-fall.png");
         resource.imagePlayerIdle = loadImage("texture/player-idle.png");
@@ -69,8 +71,6 @@ public class Main extends PApplet implements ShutDownListener {
         rootMachine.attach(new MainState(this));
         rootMachine.attach(new AnimationState(this));
 
-        frameRate(60);
-
         Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
     }
 
@@ -85,9 +85,10 @@ public class Main extends PApplet implements ShutDownListener {
         if (frame != null) {
             frame.setTitle(s);
         }
-
-//        fill(0x00);
-//        text(s, width / 2 - textWidth(s) / 2, 40);
+        else {
+            fill(0x00);
+            text(s, width / 2 - textWidth(s) / 2, 40);
+        }
     }
 
     public void mouseClicked() { rootMachine.onMouseClick(); }

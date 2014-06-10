@@ -7,7 +7,6 @@ import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.World;
 import org.jbox2d.dynamics.joints.Joint;
 import org.jbox2d.dynamics.joints.JointDef;
-
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -90,18 +89,18 @@ public class Box2D {
     }
 
     public void setGravity(float x, float y) {
-        world.setGravity(new Vec2(x,y));
+        world.setGravity(new Vec2(x, y));
     }
 
     public Vec2 coordWorldToPixels(Vec2 world) {
-        return coordWorldToPixels(world.x,world.y);
+        return coordWorldToPixels(world.x, world.y);
     }
 
     public PVector coordWorldToPixelsPVector(Vec2 world) {
 
-        Vec2 v = coordWorldToPixels(world.x,world.y);
+        Vec2 v = coordWorldToPixels(world.x, world.y);
 
-        return new PVector(v.x,v.y);
+        return new PVector(v.x, v.y);
     }
 
     public Vec2 coordWorldToPixels(float worldX, float worldY) {
@@ -118,25 +117,25 @@ public class Box2D {
 
     // convert Coordinate from pixel space to box2d world
     public Vec2 coordPixelsToWorld(Vec2 screen) {
-        return coordPixelsToWorld(screen.x,screen.y);
+        return coordPixelsToWorld(screen.x, screen.y);
     }
 
     public Vec2 coordPixelsToWorld(PVector screen) {
-        return coordPixelsToWorld(screen.x,screen.y);
+        return coordPixelsToWorld(screen.x, screen.y);
     }
 
     public Vec2 coordPixelsToWorld(float pixelX, float pixelY) {
 
-        float worldX = PApplet.map(pixelX, transX, transX+scaleFactor, 0f, 1f);
+        float worldX = PApplet.map(pixelX, transX, transX + scaleFactor, 0f, 1f);
         float worldY = pixelY;
 
         if (yFlip == -1.0f) {
-            worldY = PApplet.map(pixelY,parent.height,0f,0f,parent.height);
+            worldY = PApplet.map(pixelY, parent.height, 0f, 0f, parent.height);
         }
 
-        worldY = PApplet.map(worldY, transY, transY+scaleFactor, 0f, 1f);
+        worldY = PApplet.map(worldY, transY, transY + scaleFactor, 0f, 1f);
 
-        return new Vec2(worldX,worldY);
+        return new Vec2(worldX, worldY);
     }
 
     // Scale scalar quantity between worlds
@@ -153,7 +152,7 @@ public class Box2D {
 
         Vec2 u = new Vec2(v.x / scaleFactor, v.y / scaleFactor);
 
-        u.y *=  yFlip;
+        u.y *= yFlip;
 
         return u;
     }
@@ -162,7 +161,7 @@ public class Box2D {
 
         Vec2 u = new Vec2(v.x / scaleFactor, v.y / scaleFactor);
 
-        u.y *=  yFlip;
+        u.y *= yFlip;
 
         return u;
     }
@@ -171,7 +170,7 @@ public class Box2D {
 
         Vec2 u = new Vec2(x / scaleFactor, y / scaleFactor);
 
-        u.y *=  yFlip;
+        u.y *= yFlip;
 
         return u;
     }
@@ -180,7 +179,7 @@ public class Box2D {
 
         Vec2 u = new Vec2(v.x * scaleFactor, v.y * scaleFactor);
 
-        u.y *=  yFlip;
+        u.y *= yFlip;
 
         return u;
     }
@@ -189,7 +188,7 @@ public class Box2D {
 
         PVector u = new PVector(v.x * scaleFactor, v.y * scaleFactor);
 
-        u.y *=  yFlip;
+        u.y *= yFlip;
 
         return u;
     }

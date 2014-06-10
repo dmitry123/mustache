@@ -85,8 +85,7 @@ public class Player extends GameObject {
 
         if ((rp = getRandomizedPosition()) != null) {
             world.createDynamic(this, rp.x, rp.y, 50, PLAYER_HEIGHT);
-        }
-        else {
+        } else {
             world.createDynamic(this, x, y, 50, PLAYER_HEIGHT);
         }
     }
@@ -117,7 +116,7 @@ public class Player extends GameObject {
         this.socket = socket;
 
         thread = new Thread(
-            new PlayerSession(this));
+                new PlayerSession(this));
 
         thread.start();
     }
@@ -128,8 +127,7 @@ public class Player extends GameObject {
 
             try {
                 socket.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -142,10 +140,10 @@ public class Player extends GameObject {
     public void setIdleAnimation() {
 
         if (atlasActive != atlasFight &&
-            atlasActive != atlasJump &&
-            atlasActive != atlasFall &&
-            atlasActive != atlasDie
-        ) {
+                atlasActive != atlasJump &&
+                atlasActive != atlasFall &&
+                atlasActive != atlasDie
+                ) {
             atlasActive = atlasIdle;
         }
     }
@@ -231,8 +229,7 @@ public class Player extends GameObject {
             // close socket
             try {
                 socket.close();
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -267,8 +264,7 @@ public class Player extends GameObject {
             if (!isKilled) {
                 atlasActive = atlasFall;
             }
-        }
-        else if ((atlasActive == atlasFall || atlasActive == atlasIdle) && getBody().getLinearVelocity().y == 0) {
+        } else if ((atlasActive == atlasFall || atlasActive == atlasIdle) && getBody().getLinearVelocity().y == 0) {
 
             atlasActive = atlasIdle;
 
@@ -284,8 +280,7 @@ public class Player extends GameObject {
                     ) {
                 if (enemy instanceof Enemy) {
                     ((Enemy) enemy).killEnemy();
-                }
-                else {
+                } else {
                     ((Player) enemy).killPlayer();
                 }
 
@@ -305,8 +300,7 @@ public class Player extends GameObject {
             g.translate(-atlasActive.width, 0);
             atlasActive.render(g);
             g.popMatrix();
-        }
-        else {
+        } else {
             atlasActive.render(g);
         }
         g.popMatrix();
@@ -338,19 +332,16 @@ public class Player extends GameObject {
 
         if (atlas != atlasDie) {
             atlas.setIndex(0);
-        }
-        else {
+        } else {
             atlas.setIndex(3);
         }
 
         if (!isKilled) {
             if (atlas == atlasJump) {
                 atlasActive = atlasFall;
-            }
-            else if (atlas == atlasFall) {
+            } else if (atlas == atlasFall) {
                 atlasActive.setIndex(atlasActive.getIndex() + 1);
-            }
-            else if (atlas == atlasFight) {
+            } else if (atlas == atlasFight) {
                 atlasActive = atlasIdle;
                 isMovable = true;
             }

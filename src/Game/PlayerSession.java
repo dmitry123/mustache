@@ -1,7 +1,6 @@
 package Game;
 
 import Common.Vertex;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.io.*;
 
@@ -24,11 +23,9 @@ public class PlayerSession implements Runnable {
         try {
             _in = player.getSocket().getInputStream();
             _out = player.getSocket().getOutputStream();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             in = new DataInputStream(_in);
             out = new DataOutputStream(_out);
         }
@@ -41,11 +38,9 @@ public class PlayerSession implements Runnable {
                 if ((line = in.readUTF()) == null) {
                     break;
                 }
-            }
-            catch (EOFException e) {
+            } catch (EOFException e) {
                 break;
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
@@ -94,7 +89,7 @@ public class PlayerSession implements Runnable {
 
         int countOfPlayers = 0;
 
-        for (GameObject go : player.getWorld ().getList()) {
+        for (GameObject go : player.getWorld().getList()) {
             if (go instanceof Player) {
                 ++countOfPlayers;
             }

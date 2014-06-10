@@ -43,10 +43,21 @@ public class World implements ContactListener {
         this.height = applet.height;
     }
 
-    public int getLowestPosition() { return lowestPosition + 100; }
-    public Vertex getBackgroundOffset() { return backgroundOffset; }
-    public Box2D getBox2D() { return box2d; }
-    public ArrayList<GameObject> getList() { return gameObjectList;}
+    public int getLowestPosition() {
+        return lowestPosition + 100;
+    }
+
+    public Vertex getBackgroundOffset() {
+        return backgroundOffset;
+    }
+
+    public Box2D getBox2D() {
+        return box2d;
+    }
+
+    public ArrayList<GameObject> getList() {
+        return gameObjectList;
+    }
 
     public void invokeRenderMethod(PGraphics g) {
 
@@ -173,7 +184,7 @@ public class World implements ContactListener {
         ArrayList<GameObject> platformList = new ArrayList<GameObject>();
 
         // looking for all platforms in the world
-        for (GameObject go : getList ()) {
+        for (GameObject go : getList()) {
             if (go.getName() == "platform") {
                 platformList.add(go);
             }
@@ -191,8 +202,11 @@ public class World implements ContactListener {
         return null;
     }
 
-    public void preSolve(org.jbox2d.dynamics.contacts.Contact contact, org.jbox2d.collision.Manifold manifold) {}
-    public void postSolve(org.jbox2d.dynamics.contacts.Contact contact, org.jbox2d.callbacks.ContactImpulse contactImpulse) {}
+    public void preSolve(org.jbox2d.dynamics.contacts.Contact contact, org.jbox2d.collision.Manifold manifold) {
+    }
+
+    public void postSolve(org.jbox2d.dynamics.contacts.Contact contact, org.jbox2d.callbacks.ContactImpulse contactImpulse) {
+    }
 
     public void beginContact(Contact cp) {
 

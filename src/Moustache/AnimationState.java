@@ -85,10 +85,12 @@ public class AnimationState extends State {
         // end, if true, then goto main state
         if (type == Direction.Left || type == Direction.Right) {
             if (Math.abs(position.x) >= applet.width) {
+                rightState.onStateLoad();
                 getStateMachine().change("main");
             }
         } else {
             if (Math.abs(position.y) >= applet.height) {
+                rightState.onStateLoad();
                 getStateMachine().change("main");
             }
         }
